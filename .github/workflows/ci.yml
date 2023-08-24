@@ -44,4 +44,4 @@ jobs:
         }
         Set-OpenAuthenticodeSignature @signParams
         Get-Content test.ps1
-        Get-OpenAuthenticodeSiganture -FilePath test.ps1 -SkipCertificateCheck | Select *
+        Get-OpenAuthenticodeSignature -FilePath test.ps1 -SkipCertificateCheck | Select *
