@@ -11,6 +11,8 @@ jobs:
     permissions:
       # IMPORTANT: this permissions is mandatory for Azure OIDC authentication
       id-token: write
+      contents: read
+      packages: write
 
     steps:
     - name: Check out repository
