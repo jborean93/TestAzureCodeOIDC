@@ -1,0 +1,46 @@
+name: Test Azure OIDC
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    permissions:
+      # IMPORTANT: this permissions is mandatory for Azure OIDC authentication
+      id-token: write
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: OIDC Login to Azure
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        enable-AzPSSession: true
+
+    - name: Build module - Publish
+      shell: pwsh
+      run: |
+        Import-Module ./OpenAuthenticode
+
+        $keyParams = @{
+            VaultName = '${{ secrets.AZURE_VAULT_NAME }}'
+            Certificate = '${{ secrets.AZURE_VAULT_CERT_NAME }}'
+        }
+        $key = Get-OpenAuthenticodeAzKey @keyParams
+
+        Set-Content test.ps1 'Write-Host test'
+        $signParams = @{
+            FilePath = 'test.ps1'
+            Key = $key
+            TimeStampServer = 'http://timestamp.digicert.com'
+        }
+        Set-OpenAuthenticodeSignature @signParams
+        Get-Content test.ps1
+        Get-OpenAuthenticodeSiganture -FilePath test.ps1 -SkipCertificateCheck | Select *

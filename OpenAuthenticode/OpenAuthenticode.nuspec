@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>OpenAuthenticode</id>
+    <version>0.4.0</version>
+    <authors>Jordan Borean</authors>
+    <owners>Community</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/jborean93/PowerShell-OpenAuthenticode/blob/main/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jborean93/PowerShell-OpenAuthenticode</projectUrl>
+    <description>Cross platform PowerShell implementation of Authenticode signing and verification</description>
+    <releaseNotes>See https://github.com/jborean93/PowerShell-OpenAuthenticode/blob/main/CHANGELOG.md</releaseNotes>
+    <copyright>(c) 2023 Jordan Borean. All rights reserved.</copyright>
+    <tags>Authenticode PSEdition_Core PSModule PSIncludes_Cmdlet PSCmdlet_Add-OpenAuthenticodeSignature PSCmdlet_Clear-OpenAuthenticodeSignature PSCmdlet_Get-OpenAuthenticodeAzKey PSCmdlet_Get-OpenAuthenticodeSignature PSCmdlet_Get-OpenAuthenticodeSslDotComKey PSCmdlet_Set-OpenAuthenticodeSignature PSCommand_Add-OpenAuthenticodeSignature PSCommand_Clear-OpenAuthenticodeSignature PSCommand_Get-OpenAuthenticodeAzKey PSCommand_Get-OpenAuthenticodeSignature PSCommand_Get-OpenAuthenticodeSslDotComKey PSCommand_Set-OpenAuthenticodeSignature</tags>
+  </metadata>
+</package>
