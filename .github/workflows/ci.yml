@@ -39,17 +39,13 @@ jobs:
         }
         $key = Get-OpenAuthenticodeAzKey @keyParams
 
-        $moduleDir = Join-Path $pwd.Path 'TestAzureCodeOIDC'
-        $psm1Path = Join-Path $moduleDir 'TestAzureCodeOIDC.psm1'
+        $moduleDir = Join-Path $pwd.Path 'Module'
 
-        $null = New-Item $moduleDir -ItemType Directory
-        Set-Content $psm1Path 'Write-Host test'
         $signParams = @{
-            FilePath = $psm1Path
             Key = $key
             TimeStampServer = 'http://timestamp.digicert.com'
         }
-        Set-OpenAuthenticodeSignature @signParams
+        Get-ChildItem $moduleDir | Set-OpenAuthenticodeSignature @signParams
 
         $repoParams = @{
             Name = 'LocalRepo'

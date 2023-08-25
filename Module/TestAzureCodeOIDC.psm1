@@ -1,0 +1,3 @@
+Function Test-FunctionInAzureCodeOIDC {
+    'hi'
+}
