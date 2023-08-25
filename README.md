@@ -12,6 +12,11 @@ The following GitHub secrets must be defined:
 + `AZURE_VAULT_NAME` - The name of the Azure Key Vault the certificate is stored in
 + `AZURE_VAULT_CERT_NAME` - The name of the Azure Key Vault certificate
 
+The federated credential is registered for this repo on the `main` branch as that is where the OIDC claim will be running as.
+While you can use a branch, tag, or environment name, Azure does not support pattern matching so I cannot use the claim for tags that match `v*`.
+In the end I decided on always signing the module when a commit to `main` is made and having a separate publish workflow that uses this artifact for publishing solving this problem.
+In the future I might revisit this to see if I can lock it down even further and only have the claim be valid when it is a release tag.
+
 The authenticode signing work is done by the [OpenAuthenticode](https://github.com/jborean93/PowerShell-OpenAuthenticode/tree/main) module.
 See [Authenticode Azure Keys](https://github.com/jborean93/PowerShell-OpenAuthenticode/blob/main/docs/en-US/about_AuthenticodeAzureKeys.md) for more information on how the module can use a key stores in an Azure Key Vault.
 It works seamlessly with the Azure OIDC login task to authenticate as a principal when retrieving a key without sharing any secrets.
