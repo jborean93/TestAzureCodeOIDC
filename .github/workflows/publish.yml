@@ -1,4 +1,4 @@
-name: Publish code
+name: Publish module
 on:
   release:
     types:
@@ -23,3 +23,14 @@ jobs:
       shell: pwsh
       run: |
         Get-Item ./*.nupkg | Select-Object -ExpandProperty FullName
+
+    # This is commented out but shows how you can then publish the nupkg
+    # - name: Publish to Gallery
+    #   shell: pwsh
+    #   run: >-
+    #     dotnet nuget push '*.nupkg'
+    #     --api-key $env:PSGALLERY_TOKEN
+    #     --source 'https://www.powershellgallery.com/api/v2/package'
+    #     --no-symbols
+    #   env:
+    #     PSGALLERY_TOKEN: ${{ secrets.PSGALLERY_TOKEN }}
