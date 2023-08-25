@@ -39,18 +39,22 @@ jobs:
         }
         $key = Get-OpenAuthenticodeAzKey @keyParams
 
-        $moduleDir = Join-Path $pwd.Path 'Module'
+        $moduleDir = Join-Path $pwd.Path 'TestAzureCodeOIDC'
 
         $signParams = @{
             Key = $key
             TimeStampServer = 'http://timestamp.digicert.com'
+            Verbose = $true
         }
         Get-ChildItem $moduleDir | Set-OpenAuthenticodeSignature @signParams
 
+        $publishLocation = Join-Path $pwd.Path 'output'
+        $null = New-Item $publishLocation -ItemType Directory
+
         $repoParams = @{
             Name = 'LocalRepo'
-            SourceLocation = $pwd.Path
-            PublishLocation = $pwd.Path
+            SourceLocation = $publishLocation
+            PublishLocation = $publishLocation
             InstallationPolicy = 'Trusted'
         }
         Register-PSRepository @repoParams
@@ -65,4 +69,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: PSModule
-        path: '*.nupkg'
+        path: output/*.nupkg
