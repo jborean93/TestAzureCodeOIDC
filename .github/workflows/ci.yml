@@ -71,7 +71,3 @@ jobs:
         name: PSModule
         path: output/*.nupkg
 
-    - name: purpose fail
-      shell: pwsh
-      run: |
-        throw "abc"
