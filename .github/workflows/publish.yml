@@ -19,10 +19,10 @@ jobs:
         commit: ${{ github.sha }}
         name: PSModule
 
-    - name: check dir
-      shell: pwsh
-      run: |
-        Get-Item ./*.nupkg | Select-Object -ExpandProperty FullName
+    - name: Upload nupkg as release asset
+      uses: softprops/action-gh-release@v1
+      with:
+        files: '*.nupkg'
 
     # This is commented out but shows how you can then publish the nupkg
     # - name: Publish to Gallery
