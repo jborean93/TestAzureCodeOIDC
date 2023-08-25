@@ -1,4 +1,4 @@
-name: Test Azure OIDC
+name: CI Workflow
 on:
   push:
     branches:
@@ -13,8 +13,9 @@ jobs:
     name: build
     runs-on: ubuntu-latest
     permissions:
-      # IMPORTANT: this permissions is mandatory for Azure OIDC authentication
+      # Needed for Azure OIDC authentication
       id-token: write
+      # Needed to checkout repository
       contents: read
 
     steps:
@@ -51,7 +52,7 @@ jobs:
         }
         Get-ChildItem $moduleDir | Set-OpenAuthenticodeSignature @signParams
 
-    - name: Publish module
+    - name: Build module
       shell: pwsh
       run: |
         $moduleDir = Join-Path $pwd.Path 'TestAzureCodeOIDC'

@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     name: publish
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v')  # Skips any tags that don't start with v
     runs-on: ubuntu-latest
     permissions:
       contents: write  # Needed for GitHub release asset task
@@ -17,8 +17,8 @@ jobs:
       id: download-artifact
       uses: dawidd6/action-download-artifact@v2
       with:
-        workflow: ci.yml
-        commit: ${{ github.sha }}
+        workflow: ci.yml  # References the build workflow by filename
+        commit: ${{ github.sha }}  # Will correspond to the commit the tag is based on
         name: PSModule
 
     - name: Upload nupkg as release asset
@@ -27,7 +27,7 @@ jobs:
         files: '*.nupkg'
 
     # This is commented out but shows how you can then publish the nupkg
-    # - name: Publish to Gallery
+    # - name: Publish to the PowerShell Gallery
     #   shell: pwsh
     #   run: >-
     #     dotnet nuget push '*.nupkg'
