@@ -1,0 +1,23 @@
+name: Publish code
+on:
+  release:
+    types:
+    - published
+
+jobs:
+  build:
+    name: publish
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        commit: ${{ github.sha }}
+        name: PSModule
+
+    - name: check dir
+      shell: pwsh
+      run: |
+        Get-ChildItem
