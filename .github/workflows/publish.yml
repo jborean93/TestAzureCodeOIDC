@@ -21,4 +21,4 @@ jobs:
     - name: check dir
       shell: pwsh
       run: |
-        Get-ChildItem
+        Get-ChildItem $pwd -Recurse
