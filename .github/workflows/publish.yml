@@ -17,9 +17,10 @@ jobs:
         workflow: ci.yml
         commit: ${{ github.sha }}
         name: PSModule
-        path: ${{ github.workspace }}
+        # path: ${{ github.workspace }}
 
     - name: check dir
       shell: pwsh
       run: |
-        Get-ChildItem '${{ github.workspace }}' -Recurse -Force
+        Get-Item ./*.nupkg | Select-Object FullName
+        # Get-ChildItem '${{ github.workspace }}' -Recurse -Force
